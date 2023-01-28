@@ -11,14 +11,14 @@ let fetchData = async function (a) {
       let jsonArray = Object.values(jsonObject[0]);
       /*  console.log("L'array è ", jsonArray); */
       // forEach sul nuovo array per vedere tutte le canzoni
-      jsonArray.forEach((songs) => {
+      /* jsonArray.forEach((songs) => {
         console.log(
           "Nome canzone: ",
           songs.title,
           "Autore: ",
           songs.artist.name
         );
-      });
+      }); */
 
       // ************** popolo sezione 1 **************
 
@@ -69,6 +69,30 @@ let fetchData = async function (a) {
           </div>
         </div>`;
 
+      // ************** creo lista dei titoli per l'alert *******************
+      console.log("TITOLI CANZONI", document.querySelectorAll("h5"));
+      let titoli = document.querySelectorAll("h5");
+      let arrayTitoli = [];
+      titoli.forEach((titolo) => {
+        arrayTitoli.push(titolo.innerHTML);
+      });
+      console.log("ARRAY TITOLI: ", arrayTitoli);
+
+      // **************** popolo l'alert ************************
+      let alert = document.getElementById("alert");
+      alert.innerHTML = `<ul class="list-group">
+        <li class="list-group-item"><h4>Le mie canzoni preferite!❤️</h4></li>
+        <li class="list-group-item">${arrayTitoli[0]}</li>
+        <li class="list-group-item">${arrayTitoli[1]}</li>
+        <li class="list-group-item">${arrayTitoli[2]}</li>
+        <li class="list-group-item">${arrayTitoli[3]}</li>       
+        </ul> <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>`;
+
       // ************* popolo sezione 2 ***************
       const prefSongDiv = document.getElementById("prefSong");
       prefSongDiv.innerHTML = `<div class="col mb-3 mb-sm-0"  >
@@ -101,14 +125,14 @@ let fetchData2 = async function (b) {
       let jsonArray = Object.values(jsonObject[0]);
       /*  console.log("L'array è ", jsonArray); */
       // forEach sul nuovo array per vedere tutte le canzoni
-      jsonArray.forEach((songs) => {
+      /* jsonArray.forEach((songs) => {
         console.log(
           "Nome canzone: ",
           songs.title,
           "Autore: ",
           songs.artist.name
         );
-      });
+      }); */
       // ************* popolo sezione 2 ***************
       const prefSongDiv = document.getElementById("prefSong");
       prefSongDiv.innerHTML = `<div class="col mb-3 mb-sm-0"  >
@@ -141,14 +165,14 @@ let fetchData3 = async function (c) {
       let jsonArray = Object.values(jsonObject[0]);
       /*  console.log("L'array è ", jsonArray); */
       // forEach sul nuovo array per vedere tutte le canzoni
-      jsonArray.forEach((songs) => {
+      /* jsonArray.forEach((songs) => {
         console.log(
           "Nome album: ",
           songs.album.title,
           "Autore: ",
           songs.album.title
         );
-      });
+      }); */
       // ************* popolo sezione 3.1 ***************
       const albumCarousel1 = document.getElementById("albumCarousel1");
       albumCarousel1.innerHTML = `<img src="${jsonArray[0].album.cover_xl}" class="d-block w-100" alt="..." />
@@ -180,14 +204,14 @@ let fetchData4 = async function (d) {
       let jsonArray = Object.values(jsonObject[0]);
       /*  console.log("L'array è ", jsonArray); */
       // forEach sul nuovo array per vedere tutte le canzoni
-      jsonArray.forEach((songs) => {
+      /* jsonArray.forEach((songs) => {
         console.log(
           "Nome album: ",
           songs.album.title,
           "Autore: ",
           songs.album.title
         );
-      });
+      }); */
       // ************* popolo sezione 3.2 ***************
       const albumCarousel2 = document.getElementById("albumCarousel2");
       albumCarousel2.innerHTML = `<img src="${jsonArray[0].album.cover_xl}" class="d-block w-100" alt="..." />
@@ -219,14 +243,14 @@ let fetchData5 = async function (e) {
       let jsonArray = Object.values(jsonObject[0]);
       /*  console.log("L'array è ", jsonArray); */
       // forEach sul nuovo array per vedere tutte le canzoni
-      jsonArray.forEach((songs) => {
+      /* jsonArray.forEach((songs) => {
         console.log(
           "Nome album: ",
           songs.album.title,
           "Autore: ",
           songs.album.title
         );
-      });
+      }); */
       // ************* popolo sezione 3.2 ***************
       const albumCarousel3 = document.getElementById("albumCarousel3");
       albumCarousel3.innerHTML = `<img src="${jsonArray[1].album.cover_xl}" class="d-block w-100" alt="..." />
@@ -245,8 +269,15 @@ let fetchData5 = async function (e) {
   }
 };
 
-fetchData("metallica"); //eseguo il fetch per la sez 1
-fetchData2("backinblack"); //eseguo il fetch per la sez 2
+fetchData("taylorswift"); //eseguo il fetch per la sez 1
+fetchData2("jeremycamp"); //eseguo il fetch per la sez 2
 fetchData3("metallica"); //eseguo il fetch per la sez 3.1
 fetchData4("californication"); //eseguo il fetch per la sez 3.2
 fetchData5("oasis"); //eseguo il fetch per la sez 3.3
+
+// ******************** ALERT BUTTON ***********************
+
+let mostraTitoli = () => {
+  let alert = document.getElementById("alert");
+  alert.classList.toggle("showMe");
+};
