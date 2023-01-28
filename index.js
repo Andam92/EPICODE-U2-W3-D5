@@ -1,27 +1,24 @@
-const fetchData1 = async function () {
-  //dichiaro la funzione /che deve essere async) con fetch al suo intern
+let fetchData = async function (a) {
   try {
     let res = await fetch(
-      "https://striveschool-api.herokuapp.com/api/deezer/search?q=onerepublic"
-    ); //eseguo il fetch e lo associo alla var "res" (response)
+      `https://striveschool-api.herokuapp.com/api/deezer/search?q=${a}`
+    );
     console.log(res);
     if (res.ok) {
-      //se la proprietà "ok" di res è true, procedo a convertire in oggetto (col metodo json)
       let data = await res.json();
-      /* console.log("data", data); */
-
+      console.log(data);
       let jsonObject = Object.values(data);
       let jsonArray = Object.values(jsonObject[0]);
       /*  console.log("L'array è ", jsonArray); */
       // forEach sul nuovo array per vedere tutte le canzoni
-      /*  jsonArray.forEach((songs) => {
+      jsonArray.forEach((songs) => {
         console.log(
           "Nome canzone: ",
           songs.title,
           "Autore: ",
           songs.artist.name
         );
-      }); */
+      });
 
       // ************** popolo sezione 1 **************
 
@@ -84,77 +81,172 @@ const fetchData1 = async function () {
         </div>
         `;
     } else {
-      //se "ok" non è true, significa che la chiamata è andata a buon fine ma c'è un problema di risposta
-      console.log("Porcapaletta");
+      console.log("errore");
     }
   } catch (error) {
-    //il catch invece avviene se c'è un problema a monte, es. connessione
     console.log("errore di fetch -> catch", error);
   }
 };
 
-const fetchData2 = async function () {
+let fetchData2 = async function (b) {
   try {
-    let res1 = await fetch(
-      "https://striveschool-api.herokuapp.com/api/deezer/search?q=metallica"
-    ); //eseguo il fetch e lo associo alla var "res" (response)
-    console.log(res1);
-    if (res1.ok) {
-      //se la proprietà "ok" di res è true, procedo a convertire in oggetto (col metodo json)
-      let data1 = await res1.json();
-      console.log("data", data1);
-
-      let jsonObject1 = Object.values(data1);
-      let jsonArray1 = Object.values(jsonObject1[0]);
-      console.log("L'array è ", jsonArray1);
+    let res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/deezer/search?q=${b}`
+    );
+    console.log(res);
+    if (res.ok) {
+      let data = await res.json();
+      console.log(data);
+      let jsonObject = Object.values(data);
+      let jsonArray = Object.values(jsonObject[0]);
+      /*  console.log("L'array è ", jsonArray); */
       // forEach sul nuovo array per vedere tutte le canzoni
-      jsonArray1.forEach((songs) => {
-        console.log("Album: ", songs.album.title);
+      jsonArray.forEach((songs) => {
+        console.log(
+          "Nome canzone: ",
+          songs.title,
+          "Autore: ",
+          songs.artist.name
+        );
       });
-      console.log(jsonArray1[0].album.title);
-      let myCarousel = document.getElementById("myCarousel");
-      myCarousel.innerHTML = `
-       <div class="carousel-inner">
-    '<div class="carousel-item active">
-      <img src="${jsonArray1[0].album.cover_xl}" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>${jsonArray1[0].album.title}</h5>
-         <a href="${jsonArray1[0].album.tracklist}">Tracklist </a>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="${jsonArray1[2].album.cover_xl}" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-caption d-none d-md-block">
-        <h5>${jsonArray1[2].album.title}</h5>
-         <a href="${jsonArray1[2].album.tracklist}">Tracklist </a>
-      </div>
-    <div class="carousel-item">
-      <img src="${jsonArray1[0].album.cover_xl}" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>${jsonArray1[0].album.title}</h5>
-         <a href="${jsonArray1[0].album.tracklist}">Tracklist </a>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</div>`;
+      // ************* popolo sezione 2 ***************
+      const prefSongDiv = document.getElementById("prefSong");
+      prefSongDiv.innerHTML = `<div class="col mb-3 mb-sm-0"  >
+      <div class="card text-center" >
+            <img src="${jsonArray[0].album.cover_xl}" class="card-img-top rounded-top" alt="...">
+        <div class="card-body">
+            <h3 class="card-title">${jsonArray[0].title}</h3>
+        </div>
+        </div>
+        </div>
+        `;
     } else {
-      console.log("Porcapaletta");
+      console.log("errore");
     }
   } catch (error) {
-    //il catch invece avviene se c'è un problema a monte, es. connessione
     console.log("errore di fetch -> catch", error);
   }
 };
 
-fetchData1(); //eseguo il fetch
-fetchData2();
+let fetchData3 = async function (c) {
+  try {
+    let res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/deezer/search?q=${c}`
+    );
+    console.log(res);
+    if (res.ok) {
+      let data = await res.json();
+      console.log(data);
+      let jsonObject = Object.values(data);
+      let jsonArray = Object.values(jsonObject[0]);
+      /*  console.log("L'array è ", jsonArray); */
+      // forEach sul nuovo array per vedere tutte le canzoni
+      jsonArray.forEach((songs) => {
+        console.log(
+          "Nome album: ",
+          songs.album.title,
+          "Autore: ",
+          songs.album.title
+        );
+      });
+      // ************* popolo sezione 3.1 ***************
+      const albumCarousel1 = document.getElementById("albumCarousel1");
+      albumCarousel1.innerHTML = `<img src="${jsonArray[0].album.cover_xl}" class="d-block w-100" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h3>${jsonArray[0].album.title}</h3> <br/>
+                <a href="https://api.deezer.com/album/212377/tracks" >
+                  Tracklist
+                </a>
+              </div>
+        `;
+    } else {
+      console.log("errore");
+    }
+  } catch (error) {
+    console.log("errore di fetch -> catch", error);
+  }
+};
+
+let fetchData4 = async function (d) {
+  try {
+    let res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/deezer/search?q=${d}`
+    );
+    console.log(res);
+    if (res.ok) {
+      let data = await res.json();
+      console.log(data);
+      let jsonObject = Object.values(data);
+      let jsonArray = Object.values(jsonObject[0]);
+      /*  console.log("L'array è ", jsonArray); */
+      // forEach sul nuovo array per vedere tutte le canzoni
+      jsonArray.forEach((songs) => {
+        console.log(
+          "Nome album: ",
+          songs.album.title,
+          "Autore: ",
+          songs.album.title
+        );
+      });
+      // ************* popolo sezione 3.2 ***************
+      const albumCarousel2 = document.getElementById("albumCarousel2");
+      albumCarousel2.innerHTML = `<img src="${jsonArray[0].album.cover_xl}" class="d-block w-100" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h3 class="text-bg-light">${jsonArray[0].album.title}</h3> <br/>
+                <a class="text-light" href="https://api.deezer.com/album/212377/tracks" >
+                  Tracklist
+                </a>
+              </div>
+        `;
+    } else {
+      console.log("errore");
+    }
+  } catch (error) {
+    console.log("errore di fetch -> catch", error);
+  }
+};
+
+let fetchData5 = async function (e) {
+  try {
+    let res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/deezer/search?q=${e}`
+    );
+    console.log(res);
+    if (res.ok) {
+      let data = await res.json();
+      console.log(data);
+      let jsonObject = Object.values(data);
+      let jsonArray = Object.values(jsonObject[0]);
+      /*  console.log("L'array è ", jsonArray); */
+      // forEach sul nuovo array per vedere tutte le canzoni
+      jsonArray.forEach((songs) => {
+        console.log(
+          "Nome album: ",
+          songs.album.title,
+          "Autore: ",
+          songs.album.title
+        );
+      });
+      // ************* popolo sezione 3.2 ***************
+      const albumCarousel3 = document.getElementById("albumCarousel3");
+      albumCarousel3.innerHTML = `<img src="${jsonArray[1].album.cover_xl}" class="d-block w-100" alt="..." />
+              <div class="carousel-caption d-none d-md-block">
+                <h3 class="text-bg-dark" >${jsonArray[1].album.title}</h3> <br/>
+                <a class="text-light" href="https://api.deezer.com/album/212377/tracks" >
+                  Tracklist
+                </a>
+              </div>
+        `;
+    } else {
+      console.log("errore");
+    }
+  } catch (error) {
+    console.log("errore di fetch -> catch", error);
+  }
+};
+
+fetchData("metallica"); //eseguo il fetch per la sez 1
+fetchData2("backinblack"); //eseguo il fetch per la sez 2
+fetchData3("metallica"); //eseguo il fetch per la sez 3.1
+fetchData4("californication"); //eseguo il fetch per la sez 3.2
+fetchData5("oasis"); //eseguo il fetch per la sez 3.3
