@@ -9,16 +9,16 @@ let fetchData = async function (a) {
       console.log(data);
       let jsonObject = Object.values(data);
       let jsonArray = Object.values(jsonObject[0]);
-      /*  console.log("L'array è ", jsonArray); */
+      console.log("L'array è ", jsonArray);
       // forEach sul nuovo array per vedere tutte le canzoni
-      /* jsonArray.forEach((songs) => {
+      jsonArray.forEach((songs) => {
         console.log(
           "Nome canzone: ",
           songs.title,
           "Autore: ",
           songs.artist.name
         );
-      }); */
+      });
 
       // ************** popolo sezione 1 **************
 
@@ -104,6 +104,25 @@ let fetchData = async function (a) {
         </div>
         </div>
         `;
+
+      // ************** ORDINO CANZONI PER RANK ***************
+      let sortedSongs = jsonArray.sort((a, b) => a.rank - b.rank);
+      console.log("CANZONI IN ORDINE", sortedSongs);
+
+      // ***************** POPOLO MODALE *************************
+      let mostraClassifica = function () {
+        sortedSongs.forEach((song) => {
+          const node = document.createElement("li");
+          node.classList.add("list-group-item");
+          const textnode = document.createTextNode(`${song.title}`);
+          node.appendChild(textnode);
+          document.getElementById("modale").appendChild(node);
+        });
+      };
+      document
+        .getElementById("modal_button")
+        .addEventListener("click", mostraClassifica);
+      // ******************************************************
     } else {
       console.log("errore");
     }
@@ -269,8 +288,8 @@ let fetchData5 = async function (e) {
   }
 };
 
-fetchData("taylorswift"); //eseguo il fetch per la sez 1
-fetchData2("jeremycamp"); //eseguo il fetch per la sez 2
+fetchData("metallica"); //eseguo il fetch per la sez 1
+fetchData2("countingstars"); //eseguo il fetch per la sez 2
 fetchData3("metallica"); //eseguo il fetch per la sez 3.1
 fetchData4("californication"); //eseguo il fetch per la sez 3.2
 fetchData5("oasis"); //eseguo il fetch per la sez 3.3
@@ -281,3 +300,5 @@ let mostraTitoli = () => {
   let alert = document.getElementById("alert");
   alert.classList.toggle("showMe");
 };
+
+// ************************* RANKING SONGS **********************
